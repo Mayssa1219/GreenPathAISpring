@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Succès - GreenPathAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: #f3f8f3;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 440px;
+            margin: 32px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
+            padding: 32px 24px;
+        }
+        .login-logo {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        .login-logo img {
+            margin-bottom: 6px;
+        }
+        .login-brand {
+            color: #2e7d32;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        h2 {
+            color: #2e7d32;
+            text-align: center;
+            font-size: 1.3rem;
+            margin-top: 0;
+        }
+        .success-icon {
+            display: block;
+            margin: 0 auto 18px auto;
+            width: 50px;
+            height: 50px;
+        }
+        .success-message {
+            color: #357a38;
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 18px 0 28px 0;
+        }
+        .footer {
+            margin-top: 36px;
+            font-size: 0.93rem;
+            color: #888;
+            text-align: center;
+        }
+        @media (max-width: 520px) {
+            .container {
+                padding: 18px 5px;
+            }
+            .login-svg, .success-icon {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-logo">
+        <img src="https://res.cloudinary.com/ds9vfy7vv/image/upload/v1751187453/logo_fi6w3c.png" alt="GreenPathAI Logo" width="50" height="50">
+        <span class="login-brand">GreenPathAI</span>
+    </div>
+    <img src="https://res.cloudinary.com/ds9vfy7vv/image/upload/v1751187453/logo_fi6w3c.png" alt="Succès" class="success-icon">
+    <h2>Opération réussie !</h2>
+    <div class="success-message" th:text="${message}">
+        Votre inscription a été validée avec succès.<br>
+        Vous pouvez désormais profiter pleinement de nos services.
+    </div>
+
+    <div class="footer">
+        &copy; 2025 GreenPathAI. Tous droits réservés.<br>
+        <a href="mailto:support@greenpath.com" style="color:#2e7d32;text-decoration:none;">Support GreenPath</a>
+    </div>
+</div>
+</body>
+</html>

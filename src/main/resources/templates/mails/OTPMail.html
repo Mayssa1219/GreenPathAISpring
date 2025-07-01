@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vérification GreenPath</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: #f3f8f3;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 440px;
+            margin: 32px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.10);
+            padding: 32px 24px;
+        }
+        .login-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .login-logo img {
+            margin-bottom: 6px;
+            display: block;
+        }
+        .login-brand {
+            color: #2e7d32;
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            text-align: center;
+        }
+        h2 {
+            color: #2e7d32;
+            text-align: center;
+            font-size: 1.4rem;
+            margin-top: 0;
+        }
+        .otp-code {
+            display: block;
+            margin: 24px auto;
+            padding: 16px 0;
+            width: 190px;
+            font-size: 2rem;
+            letter-spacing: 12px;
+            text-align: center;
+            color: #388e3c;
+            background: #e6f4ea;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 1px dashed #82b29a;
+        }
+        .footer {
+            margin-top: 36px;
+            font-size: 0.93rem;
+            color: #888;
+            text-align: center;
+        }
+        @media (max-width: 520px) {
+            .container {
+                padding: 18px 5px;
+            }
+            .login-logo img {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            .login-brand {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="login-logo">
+        <img src="https://res.cloudinary.com/ds9vfy7vv/image/upload/v1751187453/logo_fi6w3c.png" alt="GreenPathAI Logo" width="50" height="50">
+        <span class="login-brand">GreenPathAI</span>
+    </div>
+
+    <h2>Bienvenue sur GreenPath&nbsp;!</h2>
+    <p>Pour valider votre inscription, saisissez le code de vérification ci-dessous :</p>
+
+    <div class="otp-code" th:text="${otp}">123456</div>
+
+    <p style="text-align:center;">Ce code est valable <strong>5 minutes</strong>.</p>
+    <p style="margin-top:22px;">Si vous n’êtes pas à l’origine de cette demande, ignorez simplement cet email.</p>
+
+    <div class="footer">
+        &copy; 2025 GreenPathAI. Tous droits réservés.<br>
+        <a href="mailto:support@greenpath.com" style="color:#2e7d32;text-decoration:none;">Support GreenPath</a>
+    </div>
+</div>
+</body>
+</html>
