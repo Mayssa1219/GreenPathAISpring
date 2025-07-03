@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -49,7 +50,7 @@ public class OTPController {
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestParam String email, @RequestParam String otp) {
+    public ResponseEntity<Map<String, String>> verifyOtp(@RequestParam String email, @RequestParam String otp) {
         Optional<OtpToken> otpTokenOpt = otpTokenRepository.findById(email);
         if (otpTokenOpt.isEmpty()) {
             return ResponseEntity
@@ -59,6 +60,7 @@ public class OTPController {
         OtpToken otpToken = otpTokenOpt.get();
 
         if (otpToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            otpTokenRepository.deleteById(email); // Nettoyage sécurité
             return ResponseEntity
                     .status(400)
                     .body(Collections.singletonMap("message", "OTP expiré."));
@@ -70,17 +72,30 @@ public class OTPController {
                     .body(Collections.singletonMap("message", "OTP incorrect."));
         }
 
-      //activer le compte du client
+        // Activer le compte client
         Client client = clientRepository.findByEmail(email);
         if (client != null) {
             client.setStatut("actif");
             clientRepository.save(client);
         }
-        otpTokenRepository.deleteById(email);
+
+        otpTokenRepository.deleteById(email); // Supprime l'OTP dès qu'il a été utilisé
+
+        // Envoi du mail de succès (gestion d'erreur)
+        if (client != null) {
+            try {
+                // Tu peux personnaliser le message
+                String message = "Bonjour " + client.getFullname() + ",<br>Votre compte a été activé avec succès !";
+                mailService.sendSuccessEmail(client.getEmail(), message);
+            } catch (Exception e) {
+                // log.error("Erreur lors de l'envoi du mail de succès à " + email, e);
+                return ResponseEntity.ok(Collections.singletonMap("message",
+                        "OTP vérifié, compte activé ! (Attention : l'email de confirmation n'a pas pu être envoyé)"));
+            }
+        }
 
         return ResponseEntity.ok(Collections.singletonMap("message", "OTP vérifié, compte activé !"));
     }
-
     private String generateOtp(int length) {
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();

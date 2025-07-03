@@ -52,12 +52,12 @@ public class MailService {
     public void sendResetPasswordEmail(String to, String resetUrl) throws MessagingException {
         Context context = new Context();
         context.setVariable("resetUrl", resetUrl);
-        sendHtmlEmail(to, "Réinitialisation de votre mot de passe GreenPathAI", "reset-password-email.html", context);
+        sendHtmlEmail(to, "Réinitialisation de votre mot de passe GreenPathAI", "mails/ResetPassword.html", context);
     }
 
     public void sendSuccessEmail(String to, String message) throws MessagingException {
         Context context = new Context();
         context.setVariable("message", message);
-        sendHtmlEmail(to, "Opération réussie - GreenPathAI", "success-email.html", context);
+        sendHtmlEmail(to, "Opération réussie - GreenPathAI", "mails/SuccessMail.html", context);
     }
 }
