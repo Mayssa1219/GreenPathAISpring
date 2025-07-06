@@ -1,6 +1,8 @@
 package com.example.greenpath.Models;
 
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,6 +33,33 @@ public class Client {
     private String password;
     @Column(nullable = true)
     private String statut="en attente";
+    @Column(nullable = false)
+    private double natureScore = 0;
+    @Column(nullable = false)
+    private double cultureScore = 0;
+    @Column(nullable = false)
+    private double sportScore = 0;
+    @Column(nullable = false)
+    private double ecoScore = 0;
+
+    @Column(nullable = false)
+    private double dureePreferee = 0;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "client_favoris",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "circuit_id")
+    )
+    private Set<Circuit> favoris = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "client_lieux_visites",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "lieu_id")
+    )
+    private Set<Lieu> lieuxVisites = new HashSet<>();
+
 
     public Client() {}
 
@@ -78,4 +107,61 @@ public class Client {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public Set<Circuit> getFavoris() {
+        return favoris;
+    }
+
+    public void setFavoris(Set<Circuit> favoris) {
+        this.favoris = favoris;
+    }
+
+    public double getNatureScore() {
+        return natureScore;
+    }
+
+    public void setNatureScore(double natureScore) {
+        this.natureScore = natureScore;
+    }
+
+    public double getCultureScore() {
+        return cultureScore;
+    }
+
+    public void setCultureScore(double cultureScore) {
+        this.cultureScore = cultureScore;
+    }
+
+    public double getSportScore() {
+        return sportScore;
+    }
+
+    public void setSportScore(double sportScore) {
+        this.sportScore = sportScore;
+    }
+
+    public double getEcoScore() {
+        return ecoScore;
+    }
+
+    public void setEcoScore(double ecoScore) {
+        this.ecoScore = ecoScore;
+    }
+
+    public double getDureePreferee() {
+        return dureePreferee;
+    }
+
+    public void setDureePreferee(double dureePreferee) {
+        this.dureePreferee = dureePreferee;
+    }
+
+
+    public Set<Lieu> getLieuxVisites() {
+        return lieuxVisites;
+    }
+
+    public void setLieuxVisites(Set<Lieu> lieuxVisites) {
+        this.lieuxVisites = lieuxVisites;
+    }
 }

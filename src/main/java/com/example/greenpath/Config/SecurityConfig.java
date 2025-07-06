@@ -32,7 +32,7 @@ public class SecurityConfig {
             if (header != null && header.startsWith("Bearer ")) {
                 String token = header.substring(7);
                 // TODO: Remplace cette ligne par ta validation JWT réelle (parsing, vérif signature, etc)
-                if ("token-valide-exemple".equals(token)) { // Remplace par ta logique
+                if ("GPATH".equals(token)) { // Remplace par ta logique
                     UsernamePasswordAuthenticationToken auth =
                             new UsernamePasswordAuthenticationToken("user", null, Collections.emptyList());
                     SecurityContextHolder.getContext().setAuthentication(auth);
@@ -65,4 +65,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }

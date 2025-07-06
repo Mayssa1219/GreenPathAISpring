@@ -31,4 +31,5 @@ public class CircuitService {
     public void deleteCircuit(Long id) {
         circuitRepository.deleteById(id);
     }
+
 }
