@@ -23,9 +23,9 @@ public class SuggestionAvanceeService {
         // Trier les scores du client par ordre décroissant
         Map<String, Double> scores = Map.of(
                 "nature", client.getNatureScore(),
-                "culture", client.getCultureScore(),
+                "patrimoine", client.getCultureScore(),
                 "sport", client.getSportScore(),
-                "eco", client.getEcoScore()
+                "gastronomie", client.getEcoScore()
         );
 
         List<String> prefsTriees = scores.entrySet().stream()

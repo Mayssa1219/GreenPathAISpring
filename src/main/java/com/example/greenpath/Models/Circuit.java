@@ -1,4 +1,5 @@
 package com.example.greenpath.Models;
+import com.example.greenpath.Enum.CircuitStatus;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -29,6 +30,22 @@ public class Circuit {
             inverseJoinColumns = @JoinColumn(name = "lieu_id")
     )
     private Set<Lieu> lieux = new HashSet<>();
+    @ManyToOne(optional = true) // guide peut être null
+    @JoinColumn(name = "guide_id")
+    private Guide guide;
+    @Enumerated(EnumType.STRING)
+    private CircuitStatus status = CircuitStatus.PROPOSE;
+    @ManyToOne
+    @JoinColumn(name = "propose_par_client_id")
+    private Client proposePar;
+
+    public Client getProposePar() {
+        return proposePar; }
+    public void setProposePar(Client proposePar) {
+        this.proposePar = proposePar; }
+
+    public CircuitStatus getStatus() { return status; }
+    public void setStatus(CircuitStatus status) { this.status = status; }
 
     // Constructeurs
     public Circuit() {}
@@ -77,5 +94,13 @@ public class Circuit {
 
     public void setLieux(Set<Lieu> lieux) {
         this.lieux = lieux;
+    }
+
+    public Guide getGuide() {
+        return guide;
+    }
+
+    public void setGuide(Guide guide) {
+        this.guide = guide;
     }
 }

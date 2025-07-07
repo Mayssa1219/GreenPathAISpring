@@ -33,12 +33,16 @@ public class Client {
     private String password;
     @Column(nullable = true)
     private String statut="en attente";
+
     @Column(nullable = false)
     private double natureScore = 0;
+
     @Column(nullable = false)
     private double cultureScore = 0;
+
     @Column(nullable = false)
     private double sportScore = 0;
+
     @Column(nullable = false)
     private double ecoScore = 0;
 
